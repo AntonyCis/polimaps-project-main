@@ -1,0 +1,104 @@
+.services {
+    padding: 1rem 1rem;
+    margin: 0 auto;
+    width: 1200px;
+    max-width: 100%;
+}
+
+.services__content {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.services__title {   
+    font-size: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--colorCinco);
+    text-align: left;
+    font-weight: 900;
+}
+
+/* Ahora el grid se aplica aquí */
+.services__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Estilo de cada tarjeta */
+.service {
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ícono dentro de la tarjeta */
+.service i {
+    font-size: 1.8rem;
+    color: var(--colorTres);
+}
+
+/* Hover de la tarjeta */
+.service:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Media Queries */
+
+/* Teléfonos */
+@media (max-width: 600px) {
+    .services__title {
+        font-size: 2rem;
+    }
+
+    .service {
+        flex-direction: column;
+        font-size: 1rem;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .service i {
+        font-size: 1.5rem;
+    }
+}
+
+/* Tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .services__title {
+        font-size: 2.2rem;
+    }
+
+    .service {
+        font-size: 1.1rem;
+        padding: 1.8rem;
+    }
+
+    .service i {
+        font-size: 1.6rem;
+    }
+}
+
+/* Escritorio */
+@media (min-width: 1025px) {
+    .services__title {
+        font-size: 2.2rem;
+    }
+
+    .service {
+        font-size: 1.25rem;
+    }
+
+    .service i {
+        font-size: 2rem;
+    }
+}

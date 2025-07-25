@@ -1,0 +1,115 @@
+.hero {
+    background-color: var(--colorUno);
+    background-image: url("../../assets/epn_dep.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    width: 100%;
+    max-width: 1200px;
+    height: 80vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    margin: 2rem auto;
+    border-radius: 20px;
+}
+
+.hero__content {
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.hero__title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: var(--fuentePrimaria);
+}
+
+.hero__subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    font-family: var(--fuenteSecundaria);
+}
+
+.button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--colorDos); 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: var(--colorTres); /* otra variable para hover */
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 1rem;
+        height: 100vh;
+    }
+
+    .hero__content {
+        padding: 1.5rem;
+    }
+
+    .hero__title {
+        font-size: 1.8rem;
+    }
+
+    .hero__subtitle {
+        font-size: 1rem;
+    }
+
+    .button {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+    }
+}
+
+/* Tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .hero__title {
+        font-size: 2.2rem;
+    }
+
+    .hero__subtitle {
+        font-size: 1.15rem;
+    }
+
+    .hero__content {
+        padding: 2rem 3rem;
+    }
+
+    .button {
+        font-size: 1.05rem;
+    }
+}
+
+/* Pantallas grandes */
+@media (min-width: 1025px) {
+    .hero__title {
+        font-size: 2.8rem;
+    }
+
+    .hero__subtitle {
+        font-size: 1.3rem;
+    }
+
+    .hero__content {
+        padding: 2.5rem 4rem;
+    }
+
+    .button {
+        font-size: 1.1rem;
+    }
+}

@@ -1,0 +1,107 @@
+.gallery {
+    padding: 2rem 1rem;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 1200px;
+}
+
+.gallery__title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: var(--colorCinco);
+    font-weight: 900;
+    text-align: left;
+}
+
+/* Contenedor que agrupa imagen + descargas */
+.gallery__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Imagen */
+.gallery__images img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery__images img:hover {
+    transform: scale(1.02);
+}
+
+/* Lista */
+.gallery__downloads {
+    width: 100%;
+}
+
+.download__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 600px;
+    width: 100%;
+}
+
+.download__item {
+    background-color: white;
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
+}
+
+.download__item:hover {
+    background-color: #eef3ff;
+}
+
+/* Media Queries */
+
+/* Teléfonos */
+@media (max-width: 768px) {
+    .gallery__title {
+        font-size: 2rem;
+    }
+
+    .gallery__content {
+        flex-direction: column;
+    }
+
+    .download__item {
+        font-size: 1rem;
+        padding: 0.8rem 1.2rem;
+    }
+}
+
+/* Escritorio (dos columnas) */
+@media (min-width: 1024px) {
+    .gallery__content {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .gallery__images,
+    .gallery__downloads {
+        flex: 1;
+        max-width: 50%;
+    }
+
+    .gallery__images {
+        padding-right: 1rem;
+    }
+
+    .gallery__downloads {
+        padding-left: 1rem;
+    }
+}

@@ -1,0 +1,79 @@
+.downloads {
+    padding: 1rem 1rem;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.downloads__content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.downloads__title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--colorCinco);
+    font-weight: 900;
+    text-align: left;
+}
+
+.downloads__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Estilo de las imágenes de descarga */
+.downloads__buttons img {
+    width: 200px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.downloads__buttons img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+
+/* Teléfonos */
+@media (max-width: 600px) {
+    .downloads__title {
+        font-size: 2rem;
+    }
+
+    .downloads__buttons img {
+        width: 160px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .downloads__title {
+        font-size: 2.2rem;
+    }
+
+    .downloads__buttons img {
+        width: 180px;
+    }
+}
+
+/* Escritorio grande */
+@media (min-width: 1025px) {
+    .downloads__title {
+        font-size: 2.2rem;
+    }
+
+    .downloads__buttons img {
+        width: 220px;
+    }
+}

@@ -1,0 +1,37 @@
+.memes__section {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+.memes__title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary);
+}
+
+.memes__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.meme__card {
+    background: var(--primary);
+    border-radius: 10px;
+    padding: 1rem;
+    width: 200px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.meme__image {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.meme__name {
+    font-weight: bold;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
