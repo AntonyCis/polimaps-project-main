@@ -1,0 +1,134 @@
+.agendador-bg {
+  min-height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-image: url('../assets/epn-fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.agendador-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 5rem auto;
+}
+
+.form-box {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.form-box h2 {
+  margin-bottom: 1rem;
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.form-box button[type="submit"] {
+  background: var(--colorDos);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.form-box button[type="button"] {
+  background: var(--colorTres);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.eventos-list {
+  flex: 1;
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.eventos-list h2 {
+  margin-bottom: 1rem;
+}
+
+.eventos-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.eventos-list li {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+.eventos-list img {
+  max-width: 100%;
+  max-height: 150px;
+  margin-top: 0.5rem;
+  border-radius: 6px;
+}
+
+.eventos-list button {
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.eventos-list button:first-child {
+  background: var(--colorDos);
+  color: #fff;
+}
+
+.eventos-list button:last-child {
+  background: var(--colorTres);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .agendador-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-box, .eventos-list {
+    max-width: 95vw;
+    min-width: 220px;
+  }
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}

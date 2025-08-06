@@ -32,16 +32,26 @@
 }
 
 .frequent__item {
-    background-color: #f0f0f0;
-    padding: 1rem;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    border-left: 4px solid transparent;
-    transition: border-color 0.3s, background-color 0.3s;
-    cursor: pointer;
-    font-size: 1rem;
-    color: #333;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
+  display: block; /* Cambiado de flex a block */
+  border-left: 4px solid transparent;
+  transition: border-color 0.3s, background-color 0.3s;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+}
+
+.frequent__item span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.frequent__item i {
+  font-size: 1.2rem;
+  color: #007bff;
 }
 
 .frequent__item:hover {
@@ -55,6 +65,19 @@
     font-size: 1.2rem;
     color: #007bff;
 }
+
+.frequent__answer {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+.frequent__item.active {
+  background-color: #e6f0ff;
+  border-left: 4px solid #007bff;
+}
+
 
 /* Tablets */
 @media (min-width: 768px) {

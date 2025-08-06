@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { authFirebase } from "../firebase";
 import { useNavigate, NavLink } from "react-router";
+import { doc, getDoc } from "firebase/firestore";
+import { dbFirebase } from "../firebase"; // Asegúrate de tener la instancia de Firestore
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,15 +16,31 @@ const Login = () => {
   } = useForm();
 
   const handleLogin = async (data) => {
-    const { email, password } = data;
-    try {
-      await signInWithEmailAndPassword(authFirebase, email, password);
+  const { email, password } = data;
+  try {
+    const userCredential = await signInWithEmailAndPassword(authFirebase, email, password);
+    const uid = userCredential.user.uid;
+
+    // Obtener el rol del usuario desde Firestore
+    const userDoc = await getDoc(doc(dbFirebase, "users", uid));
+    const userData = userDoc.data();
+    const role = userData?.rol;
+
+    // Redireccionar según el rol
+    if (role === "admin") {
       navigate("/dashboard");
-    } catch (error) {
-      console.error("Error al iniciar sesión:", error.message);
-      alert("Error: " + error.message);
+    } else if (role === "eventos") {
+      navigate("/agendador");
+    } else if (role === "docente") {
+      navigate("/docente");
+    } else {
+      navigate("/dashboard");
     }
-  };
+  } catch (error) {
+    console.error("Error al iniciar sesión:", error.message);
+    alert("Error: " + error.message);
+  }
+};
 
   return (
     <div className="login-container">

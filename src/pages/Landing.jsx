@@ -8,6 +8,7 @@ import Gallery from '../components/gallery/Gallery'
 import Header from '../components/header/Header'
 import Main from '../components/main/Main'
 import Services from '../components/services/Services'
+import Events from '../components/events/Events'
 
 const Landing = () => {
     return (
@@ -21,6 +22,9 @@ const Landing = () => {
         </div>
         <div data-aos="zoom-in" data-aos-duration="1500">
                 <About />
+        </div>
+        <div data-aos="zoom-in" data-aos-duration="1500">
+                <Events />
         </div>
         <div data-aos="zoom-in" data-aos-duration="1500">
                 <Services />

@@ -5,10 +5,13 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
+import Agendador from './pages/Agendador';
+import Map from './pages/map';
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import Memes from './pages/Memes';
 import { authFirebase } from './firebase'
+import Docente from './pages/Docente';
 
 
 function App() {
@@ -37,7 +40,11 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="/dashboard" element={user ? <Dashboard user={user.email}/> : <Navigate to="/login"/>} />
+        <Route path="map" element={<Map />} />
         <Route path="memes" element={<Memes />} />
+        <Route path="/agendador" element={<Agendador />} />
+        <Route path="/docente" element={<Docente />} />
+        {/* Redirección para rutas no definidas */}
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>  

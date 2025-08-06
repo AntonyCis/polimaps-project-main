@@ -23,9 +23,9 @@ const Header = () => {
     const currentScrollY = window.scrollY;
 
     if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        setShowHeader(false); // Oculta al bajar
+        setShowHeader(false); 
     } else {
-        setShowHeader(true); // Muestra al subir
+        setShowHeader(true); 
     }
 
     setLastScrollY(currentScrollY);
@@ -38,18 +38,18 @@ const Header = () => {
     return (
         <header className={`navbar ${showHeader ? 'navbar--show' : 'navbar--hide'}`}>
         <nav className="navbar_container">
-            <h1 className="navbar_logo">
+            <Link to="/"><h1 className="navbar_logo">
             Pol <img src={posicion} alt="ubicacion-logo" /> Maps
-            </h1>
+            </h1></Link>
 
             <ul className={`navbar_menu ${menuActive ? "menu--active" : ""}`}>
-            <li><a href="#" onClick={closeMenu}>Home</a></li>
-            <li><a href="#map" onClick={closeMenu}>Map</a></li>
+            <li><Link to="/" onClick={closeMenu}>Home</Link></li>
+            <li><Link to="/map" onClick={closeMenu}>Map</Link></li>
             <li><a href="#contact" onClick={closeMenu}>Contact</a></li>
-            <li><Link to="/memes" onClick={closeMenu}>Memes</Link></li>
             <li><button className='b1'><Link to="/login" onClick={closeMenu}><span className='truncate'>Login</span></Link></button></li>
             <li><button><Link to="/register" onClick={closeMenu}><span className='truncate'>Register</span></Link></button></li>
             </ul>
+            
 
             <div className="header__hamburger" onClick={toggleMenu}>
             <i className="fas fa-bars hamburger"></i>
