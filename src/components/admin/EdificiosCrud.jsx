@@ -43,14 +43,13 @@ const EdificiosCrud = () => {
     const edificioData = {
       nombre: data.nombre,
       imagen: data.imagen,
-      ubicacion: data.ubicacion,
       descripcion: data.descripcion,
       coords
     };
     if (id) {
       await updateDoc(doc(dbFirebase, "edificios", id), edificioData);
       setId("");
-      reset({ nombre: "", imagen: "", ubicacion: "", descripcion: "", latitud: "", longitud: "" });
+      reset({ nombre: "", imagen: "", descripcion: "", latitud: "", longitud: "" });
     } else {
       await addDoc(collection(dbFirebase, "edificios"), edificioData);
       reset();

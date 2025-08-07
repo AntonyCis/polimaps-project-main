@@ -8,7 +8,7 @@ const Gallery = () => {
     <h2 className="gallery__title">Galeria y Documentación</h2>
     <div className="gallery__content">
         <div className="gallery__images">
-            <img src={imgVideo} alt="Video" />
+            <img src={imgVideo} alt="Video" loading='lazy' />
         </div>
         <div className="gallery__downloads">
             <ul className="download__list">

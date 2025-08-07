@@ -154,7 +154,7 @@ const Map = () => {
         <div className="map-search">
           <input
             type="text"
-            placeholder="Buscar facultad..."
+            placeholder="Buscar facultad / edificio..."
             value={search}
             onChange={e => setSearch(e.target.value)}
             className="map-search-input"
