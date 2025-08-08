@@ -1,6 +1,7 @@
 # POLIMAPS PROJECT
 ---
 Para la ejecucion del proyecto se debe ejecutar los siguientes comandos despues de clonarlo:
+```bash
 - npm i
 - npm run dev
 ---
