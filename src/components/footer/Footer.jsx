@@ -9,18 +9,18 @@ const Footer = () => {
             <div class="footer__social">
                 <h3>Síguenos en redes</h3>
                 <div class="social__icons">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://facebook.com"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://twitter.com"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://instagram.com"><i class="fa-brands fa-instagram"></i></a>
                 </div>
             </div>
 
             <div class="footer__links">
                 <h3>Enlaces de interés</h3>
                 <div class="links">
-                    <a href="#">Soporte técnico</a>
-                    <a href="#">Blog de noticias</a>
-                    <a href="#">Preguntas frecuentes (FAQ)</a>
+                    <a href="#contact">Soporte técnico</a>
+                    <a href="#blog">Blog de noticias</a>
+                    <a href="#faq">Preguntas frecuentes (FAQ)</a>
                 </div>
             </div>
 

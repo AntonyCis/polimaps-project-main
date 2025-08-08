@@ -48,7 +48,7 @@
 }
 
 .form-box button:hover {
-  background: #124e8c;
+  background: var(--colorDos);
 }
 
 .form-box p {

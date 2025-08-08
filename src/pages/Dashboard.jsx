@@ -77,7 +77,6 @@ const Dashboard = ({ user }) => {
             <section className="flex justify-between items-center p-4 bg-white shadow-md">
                 <p className="text-lg font-semibold">Bienvenido - {user}</p>
                 <div className="flex gap-4">
-                    <button className="text-xl">🌙</button>
                     <button
                         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
                         onClick={handleLogout}

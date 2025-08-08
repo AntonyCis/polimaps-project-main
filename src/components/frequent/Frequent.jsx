@@ -24,7 +24,7 @@ const Frequent = () => {
   };
 
   return (
-    <section className="frequent">
+    <section className="frequent" id='faq'>
       <div className="frequent__container">
         <h2 className="frequent__title">Preguntas Frecuentes</h2>
         <ul className="frequent__list">

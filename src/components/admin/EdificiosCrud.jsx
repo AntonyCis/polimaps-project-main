@@ -202,7 +202,7 @@ const EdificiosCrud = () => {
       </div>
       <div className="map-container col-span-1 md:col-span-2 -mt-40"> 
         {/* Mapa */}
-        <div className="col-span-1 md:col-span-2 flex justify-center items-center -mt-40">
+        <div className="col-span-1 md:col-span-2 flex justify-center items-center mt-40">
           <div id="map" className="map-leaflet w-full h-[400px] rounded-xl shadow-md"></div>
         </div>
       </div>
