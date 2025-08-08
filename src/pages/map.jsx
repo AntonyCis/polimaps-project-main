@@ -30,7 +30,7 @@ const Map = () => {
   const [locationError, setLocationError] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
 
-  // Obtener facultades/edificios desde Firestore
+  // Obtener facultades desde Firestore
   useEffect(() => {
     const fetchFacultades = async () => {
       const querySnapshot = await getDocs(collection(dbFirebase, "edificios"));
@@ -45,63 +45,19 @@ const Map = () => {
     fetchFacultades();
   }, []);
 
+  // Inicializar mapa
   useEffect(() => {
     if (L.DomUtil.get('map') !== null) {
       L.DomUtil.get('map')._leaflet_id = null;
     }
-    
-    const center = [-0.2105, -78.4891];
+
+    const center = [-0.2105, -78.4891]; // Vista inicial
     const map = L.map('map').setView(center, 17);
     mapRef.current = map;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
-
-    // Configuración de geolocalización
-    const locateOptions = {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0,
-      setView: true,
-      maxZoom: 18
-    };
-
-    function onLocationFound(e) {
-      setLocationError(null);
-      setUserLocation(e.latlng);
-      const radius = e.accuracy / 2;
-      
-      // Eliminar marcadores y círculos anteriores
-      if (window.userLocationMarker) map.removeLayer(window.userLocationMarker);
-      if (window.userLocationCircle) map.removeLayer(window.userLocationCircle);
-
-      // Crear nuevos elementos
-      window.userLocationMarker = L.marker(e.latlng, { icon: userIcon })
-        .addTo(map)
-        .bindPopup(`Estás aquí (±${Math.round(radius)} metros)`)
-        .openPopup();
-      
-      window.userLocationCircle = L.circle(e.latlng, radius, {
-        color: '#136AEC',
-        fillColor: '#136AEC',
-        fillOpacity: 0.15
-      }).addTo(map);
-    }
-
-    function onLocationError(e) {
-      console.error('Error de geolocalización:', e.message);
-      setLocationError('No se pudo obtener tu ubicación. Asegúrate de haber permitido el acceso a la ubicación.');
-      
-      L.popup()
-        .setLatLng(map.getCenter())
-        .setContent('No se pudo obtener tu ubicación')
-        .openOn(map);
-    }
-
-    map.on('locationfound', onLocationFound);
-    map.on('locationerror', onLocationError);
-    map.locate(locateOptions);
 
     // Marcadores de facultades
     markersRef.current = facultades.map(facultad =>
@@ -110,6 +66,7 @@ const Map = () => {
         .bindPopup(facultad.nombre)
     );
 
+    // Click para ver coordenadas
     map.on('click', function(e) {
       const { lat, lng } = e.latlng;
       L.popup()
@@ -123,7 +80,54 @@ const Map = () => {
     };
   }, [facultades]);
 
-  // Filtrar resultados al escribir
+  // Obtener ubicación del usuario con navigator.geolocation
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const latlng = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          setUserLocation(latlng);
+          setLocationError(null);
+        },
+        error => {
+          console.error("Error de geolocalización:", error.message);
+          setLocationError("No se pudo obtener tu ubicación.");
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    } else {
+      setLocationError("Geolocalización no soportada en este navegador.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userLocation && mapRef.current) {
+      const map = mapRef.current;
+
+      if (window.userLocationMarker) map.removeLayer(window.userLocationMarker);
+      if (window.userLocationCircle) map.removeLayer(window.userLocationCircle);
+
+      window.userLocationMarker = L.marker(userLocation, { icon: userIcon })
+        .addTo(map)
+        .bindPopup("Estás aquí")
+        .openPopup();
+
+      window.userLocationCircle = L.circle(userLocation, {
+        color: '#136AEC',
+        fillColor: '#136AEC',
+        fillOpacity: 0.15,
+        radius: 20
+      }).addTo(map);
+
+      // Centrar
+      map.setView(userLocation, 18);
+    }
+  }, [userLocation]);
+
+  // Filtrar resultados
   useEffect(() => {
     setResults(
       facultades.filter(f =>
@@ -132,53 +136,95 @@ const Map = () => {
     );
   }, [search, facultades]);
 
+  // Seleccionar edificio
   const handleSelect = (facultad, idx) => {
     if (mapRef.current && markersRef.current[idx]) {
       mapRef.current.setView(facultad.coords, 18);
-      markersRef.current[idx].openPopup();
+      let popupContent = `<strong>${facultad.nombre}</strong>`;
+      if (userLocation) {
+        const distancia = mapRef.current.distance(userLocation, facultad.coords);
+        popupContent += `<br>Distancia: ${(distancia / 1000).toFixed(2)} km`;
+      }
+      markersRef.current[idx].bindPopup(popupContent).openPopup();
     }
   };
 
   return (
     <>
-      <Header />
-      <div className="map-container">
-        {locationError && (
-          <div className="location-error-message">
-            {locationError}
-            <button onClick={() => mapRef.current?.locate()}>
-              Reintentar
-            </button>
-          </div>
-        )}
-        <div className="map-search">
-          <input
-            type="text"
-            placeholder="Buscar facultad / edificio..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="map-search-input"
-          />
-          <ul className="map-search-list">
-            {results.map((facultad, idx) => (
-              <li key={facultad.nombre} className="map-search-item">
-                <button
-                  className="map-search-btn"
-                  onClick={() => handleSelect(facultad, idx)}
-                >
-                  {facultad.nombre}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <div id="map" className="map-leaflet"></div>
-        </div>
+  <Header />
+  {locationError && (
+      <div className="location-error-message">
+        {locationError}
+        <button onClick={() => window.location.reload()}>Reintentar</button>
       </div>
-      <Footer />
-    </>
+    )}
+  <div className="map-container">
+    
+
+    <div className="map-controls" style={{ maxWidth: '350px', marginBottom: '1rem' }}>
+      <input
+        type="text"
+        placeholder="Buscar facultad / edificio..."
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+        className="map-search-input"
+        style={{ display: 'block', width: '100%', marginBottom: '0.5rem' }}
+      />
+      <button
+        className="btn-my-location"
+        style={{ display: 'block', width: '100%', marginBottom: '1rem', padding: '0.5rem', fontWeight: 'bold', cursor: 'pointer' }}
+        onClick={() => {
+          if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+              pos => {
+                const latlng = {
+                  lat: pos.coords.latitude,
+                  lng: pos.coords.longitude
+                };
+                setUserLocation(latlng);
+              },
+              err => console.error(err),
+              { enableHighAccuracy: true }
+            );
+          }
+        }}
+      >
+        📍 Mi ubicación
+      </button>
+
+      <ul className="map-search-list" style={{ padding: 0, margin: 0 }}>
+        {results.map((facultad, idx) => (
+          <li key={facultad.nombre} className="map-search-item" style={{ marginBottom: '0.5rem' }}>
+            <button
+              className="map-search-btn"
+              style={{
+                display: 'block',
+                width: '100%',
+                padding: '0.5rem',
+                textAlign: 'left',
+                cursor: 'pointer',
+                border: '1px solid #ccc',
+                borderRadius: '6px',
+                backgroundColor: '#f0f0f0',
+                fontWeight: '500',
+                transition: 'background-color 0.2s ease'
+              }}
+              onClick={() => handleSelect(facultad, idx)}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#ddd')}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#f0f0f0')}
+            >
+              {facultad.nombre}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div id="map" className="map-leaflet"></div>
+  </div>
+  <Footer />
+</>
   );
-}
+};
 
 export default Map;

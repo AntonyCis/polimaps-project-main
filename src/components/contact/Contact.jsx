@@ -7,7 +7,7 @@ const Contact = () => {
         <section className="container contact" id='contact'>
             <div className="contact__form">
                 <h2 className="contact__title">¿Tienes preguntas? Escríbenos</h2>
-                <form>
+                <form action="https://formsubmit.co/antony.cisneros@epn.edu.ec" method="POST">
                     <input type="name" name="nombre" placeholder="Nombre" required/>
                     <input type="email" name="corre0" placeholder="Correo" required/>
                     <input type="tel" name="celular" placeholder="Celular" required/>
