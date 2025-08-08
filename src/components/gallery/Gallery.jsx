@@ -8,7 +8,7 @@ const Gallery = () => {
 
   return (
     <section className="gallery">
-      <h2 className="gallery__title">Galeria y Documentación</h2>
+      <h2 className="gallery__title">Galería y Documentación</h2>
       <div className="gallery__content">
         <div 
           className="gallery__images" 
